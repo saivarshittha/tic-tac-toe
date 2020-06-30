@@ -21,14 +21,22 @@ function newGame(){
 
 function allowClick(cellInBoard){
 
-	if(typeof gameBoard[cellInBoard.target.id] === 'number'){\
+	if(typeof gameBoard[cellInBoard.target.id] === 'number'){
 
 		turn(cellInBoard.target.id,player);
 
 		if(gameTie() === false){
-			turn(bestMove(),computerPlayer);
+			turn(minimax(gameBoard,computerPlayer).index,computerPlayer);
 		}
 	}
+}
+
+function turn(cellId,thePlayer){
+		gameBoard[cellId] = thePlayer;
+		document.getElementById(cellId).innerText = thePlayer;
+		let isGameWon = checkWin(gameBoard,thePlayer);
+		if(isGameWon) gameFinished(gameWon);
+
 }
 
 function vacantSquares(){
@@ -74,3 +82,26 @@ function gameTie(){
 
 	return false;
 }
+
+function gameFinished(gameWon){
+	// have to add code to set the background color based on who won the game
+
+	for(let i = 0 ; i < cells.length ; i++){
+		cells[i].removeEventListener('click',allowClick,false);
+	}
+
+	if(gameWon.player === player)
+	{
+		
+		 document.querySelector(".endgame").style.display = "block";
+  		 document.querySelector(".endgame .text").innerText = "You won";
+	}
+	else
+		{
+
+		 document.querySelector(".endgame").style.display = "block";
+  		 document.querySelector(".endgame .text").innerText = "You lose";
+
+		}
+}
+
