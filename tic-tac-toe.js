@@ -26,7 +26,7 @@ function allowClick(cellInBoard){
 		turn(cellInBoard.target.id,player);
 
 		if(gameTie() === false){
-			turn(minimax(gameBoard,computerPlayer).index,computerPlayer);
+			turn(findBestSpot(),computerPlayer);
 		}
 	}
 }
@@ -85,6 +85,7 @@ function gameTie(){
 
 function gameFinished(gameWon){
 	// have to add code to set the background color based on who won the game
+	let bestMove;
 
 	for(let i = 0 ; i < cells.length ; i++){
 		cells[i].removeEventListener('click',allowClick,false);
@@ -115,6 +116,9 @@ function gameFinished(gameWon){
 	}
 }*/
 
+function findBestSpot(){
+	return minimax(gameBoard,computerPlayer).index;
+}
 function minimax(board,thePlayer){
 
 	let scoresOfMoves = [];
@@ -128,7 +132,9 @@ function minimax(board,thePlayer){
 	}
 	else
 	{
-		checkWin(board,thePlayer)? return {score:-10} : return{score : 10};
+		if(checkWin(board,thePlayer)) return{score : -10};
+		else if(checkWin(board.computerPlayer)) return{score : 10};
+		/*checkWin(board,thePlayer)? return{score: -10} : return{score : 10};*/
 	}
 	
 
@@ -151,6 +157,24 @@ function minimax(board,thePlayer){
 		scoresOfMoves.push(tempMove);
 	}
 	
+	if(player === computerPlayer){
+		let bestScore = -999999;
+		for(let i = 0 ; i < scoresOfMoves.length ; i++){
+			if(scoresOfMoves[i].score > bestScore ){
+				bestScore = scoresOfMoves[i].score;
+				bestMove = i ;
+			}
 
-
+		}
+	} else {
+		let bestScore = 999999;
+		for(let i = 0 ; i < scoresOfMoves.length ; i++){
+			if(scoresOfMoves[i].score < bestScore){
+				bestScore = scoresOfMoves[i].score;
+				bestMove = i;
+			}
+		}
+	}
+	
+	return scoresOfMoves[bestMove];
 }
