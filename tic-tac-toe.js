@@ -104,4 +104,53 @@ function gameFinished(gameWon){
 
 		}
 }
+/*function evaluate(board,thePlayer,emptySlots){
 
+	if(checkWin(board,thePlayer)){
+		return -10;
+	} else if(checkWin(board,computerPlayer)){
+		return 10;
+	} else if(emptySlots.length === 0){
+		return 0;
+	}
+}*/
+
+function minimax(board,thePlayer){
+
+	let scoresOfMoves = [];
+
+	let emptySlots = vacantSquares(board);
+
+	//let score = evaluate(board,thePlayer,emptySlots);
+	if(emptySlots.length === 0 || !checkWin(board,player) || !checkWin(board,computerPlayer))
+	{
+		return{score : 0}
+	}
+	else
+	{
+		checkWin(board,thePlayer)? return {score:-10} : return{score : 10};
+	}
+	
+
+	for(let i = 0 ; i < emptySlots.length ; i++){
+
+		let tempMove = {};
+		tempMove.index = board[emptySlots[i]];
+		board[emptySlots[i]] = theplayer;
+
+		if(thePlayer === player){
+
+			let result = minimax(board,computerPlayer);
+			tempMove.score = result.score;
+		}else if(player === computerPlayer){
+			let result = minimax(board,computerPlayer);
+			tempMove.score = result.score;
+		}
+
+		board[emptySlots[i]] = tempMove.index;
+		scoresOfMoves.push(tempMove);
+	}
+	
+
+
+}
