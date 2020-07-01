@@ -24,8 +24,10 @@ function allowClick(cellInBoard){
 	if(typeof gameBoard[cellInBoard.target.id] === 'number'){
 
 		turn(cellInBoard.target.id,player);
-
-		if(gameTie() === false){
+		//alert("xxx");
+		//alert(findBestSpot());
+		//alert("yyy");
+		if(!gameTie()){
 			turn(findBestSpot(),computerPlayer);
 		}
 	}
@@ -35,7 +37,7 @@ function turn(cellId,thePlayer){
 		gameBoard[cellId] = thePlayer;
 		document.getElementById(cellId).innerText = thePlayer;
 		let isGameWon = checkWin(gameBoard,thePlayer);
-		if(isGameWon) gameFinished(gameWon);
+		if(isGameWon) gameFinished(isGameWon);
 
 }
 
@@ -76,7 +78,9 @@ function gameTie(){
 			cells[i].removeEventListener('click', allowClick, false);
 		}
 
-		declareResult("Game Tie!");
+		 document.querySelector(".endgame").style.display = "block";
+  		 document.querySelector(".endgame .text").innerText = "Game Tie!";
+		
 		return true;
 	}
 
@@ -124,8 +128,10 @@ function minimax(board,thePlayer){
 	let scoresOfMoves = [];
 
 	let emptySlots = vacantSquares(board);
+	//alert("Heyy");
+	//alert(emptySlots);
 
-	//let score = evaluate(board,thePlayer,emptySlots);
+/*	//let score = evaluate(board,thePlayer,emptySlots);
 	if(emptySlots.length === 0 || !checkWin(board,player) || !checkWin(board,computerPlayer))
 	{
 		return{score : 0}
@@ -134,26 +140,35 @@ function minimax(board,thePlayer){
 	{
 		if(checkWin(board,thePlayer)) return{score : -10};
 		else if(checkWin(board.computerPlayer)) return{score : 10};
-		/*checkWin(board,thePlayer)? return{score: -10} : return{score : 10};*/
+		//checkWin(board,thePlayer)? return{score: -10} : return{score : 10};
 	}
 	
-
+*/
+	if(checkWin(board,thePlayer)){
+		return {score: -10};
+	}else if(checkWin(board,computerPlayer)){
+		return {score:10};
+	}else if(vacantSquares.length === 0){
+		return {score:0};
+	}
+	//alert("heyaa");
 	for(let i = 0 ; i < emptySlots.length ; i++){
 
 		let tempMove = {};
 		tempMove.index = board[emptySlots[i]];
-		board[emptySlots[i]] = theplayer;
+		board[emptySlots[i]] = thePlayer;
 
-		if(thePlayer === player){
+		if(thePlayer === computerPlayer){
 
-			let result = minimax(board,computerPlayer);
+			let result = minimax(board,player);
 			tempMove.score = result.score;
-		}else if(player === computerPlayer){
+		}else if(player === player){
 			let result = minimax(board,computerPlayer);
 			tempMove.score = result.score;
 		}
-
+		//alert("I came ");
 		board[emptySlots[i]] = tempMove.index;
+		//alert(tempMove.index);
 		scoresOfMoves.push(tempMove);
 	}
 	
@@ -175,6 +190,6 @@ function minimax(board,thePlayer){
 			}
 		}
 	}
-	
+	////alert(scoresOfMoves);
 	return scoresOfMoves[bestMove];
 }
