@@ -4,18 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Tic Tac Toe</title>
-  
   <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-  <div> 
-   <table>
+  <table style="color:White">
     <tr>
       <td class="cell" id="0"></td>
       <td class="cell" id="1"></td>
+      
       <td class="cell" id="2"></td>
     </tr>
     <tr>
@@ -28,15 +27,12 @@
       <td class="cell" id="7"></td>
       <td class="cell" id="8"></td>
     </tr>
-   </table>
-   <div style="text-align: center;">
-   <button onClick="newGame()">Play Again!</button>
-  </div> 
- 
+  </table>
   <div class="endgame">
     <div class="text"></div>
   </div>
-  
+  <button onClick="newGame()">Replay</button>
 
   <script src="tic-tac-toe.js"></script>
 </body>
+</html>
