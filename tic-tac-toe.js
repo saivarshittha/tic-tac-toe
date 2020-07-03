@@ -1,10 +1,27 @@
 let gameBoard;
 let computerPlayer = 'O';
 let humanPlayer = 'X';
+let player1 = 'o';
+let player2 = 'x';
+let flag = 1;
+let flag1 =1;
+let count = 0;
 let winningCombinations = [ [0,3,6] , [1,4,7] , [2,5,8] , [0,1,2] , [3,4,5] , [6,7,8] , [6,4,2] , [0,4,8] ];
 const cells = document.querySelectorAll('.cell');
-newGame();
-
+function twoPlayerGame(){
+	count = 0;
+	flag = 2;
+	document.querySelector(".endgame").style.display = "none";
+	gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+	let i = 0 ;
+	while(i < cells.length){
+		cells[i].style.removeProperty('background-color');
+		cells[i].innerText = '';
+		cells[i].addEventListener('click', allowClick, false);
+		i++;
+	}
+	
+}
 function newGame() {
 	document.querySelector(".endgame").style.display = "none";
 	gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -18,10 +35,20 @@ function newGame() {
 }
 
 function allowClick(cellInBoard) {
-	if (typeof gameBoard[cellInBoard.target.id] == 'number') {
-		turn(humanPlayer,cellInBoard.target.id)
+	if (typeof gameBoard[cellInBoard.target.id] == 'number' && flag === 1) {
+		turn(humanPlayer,cellInBoard.target.id);
 		if (!gameTie() && !checkWin(gameBoard, humanPlayer))
 		 turn(computerPlayer,minimax(gameBoard, computerPlayer).index);
+	}
+	else if (typeof gameBoard[cellInBoard.target.id] == 'number' && flag === 2 && count < cells.length){
+				if(count % 2 === 0){
+			turn(player1,cellInBoard.target.id);
+		}
+		else{
+			turn(player2,cellInBoard.target.id);
+		}
+		count++;		
+	 
 	}
 }
 
@@ -74,9 +101,15 @@ function gameFinished(gameWon) {
 	if(gameWon.player == humanPlayer){
 		document.querySelector(".endgame").style.display = "block";
 		document.querySelector(".endgame .text").innerText = "You Won!";
-	} else {
+	} else if(gameWon.player == computerPlayer) {
 		document.querySelector(".endgame").style.display = "block";
 		document.querySelector(".endgame .text").innerText = "You lose..";
+	}else if(gameWon.player == player1){
+		document.querySelector(".endgame").style.display = "block";
+		document.querySelector(".endgame .text").innerText = "Player1 won!!";		
+	} else if(gameWon.player == player2){
+		document.querySelector(".endgame").style.display = "block";
+		document.querySelector(".endgame .text").innerText = "Player2 won!!";
 	}
 
 }
