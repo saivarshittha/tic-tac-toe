@@ -42,5 +42,34 @@ html {
 }
 
 
+/*.selectSymbol{
+  display: none;
+  width: 220px;
+  top: 110px;
+  background-color: rgba(213, 239, 251, 0.8);
+  position: absolute;
+  left: 50%;
+  margin-left: -110px;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  text-align: center;
+  border-radius: 5px;
+  color: #222222;
+  font-size: 2em;
+}
+
+.selectSymbol button{
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size:  50px;
+  width: 70px;
+}
+
+.selectSymbol  button:first-of-type {
+  margin-right: 10px;
+}
+.selectSymbol  button:last-of-type {
+  margin-left: 10px;
+}
 
 
+*/
