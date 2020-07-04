@@ -41,11 +41,14 @@ function allowClick(cellInBoard) {
 		 turn(computerPlayer,minimax(gameBoard, computerPlayer).index);
 	}
 	else if (typeof gameBoard[cellInBoard.target.id] == 'number' && flag === 2 && count < cells.length){
-				if(count % 2 === 0){
-			turn(player1,cellInBoard.target.id);
+		if(count % 2 === 0){
+			if(!gameTie())turn(player1,cellInBoard.target.id);
+			gameTie();
 		}
 		else{
-			turn(player2,cellInBoard.target.id);
+
+			if(!gameTie())turn(player2,cellInBoard.target.id);
+			gameTie();
 		}
 		count++;		
 	 
