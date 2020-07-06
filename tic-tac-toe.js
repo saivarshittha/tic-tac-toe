@@ -151,6 +151,9 @@ function minimax(board, player) {
 		}
 
 		board[emptySlots[i]] = tempMove.index;
+		if((player === computerPlayer && tempMove.score === 10) || (player === humanPlayer && tempMove.score === -10))
+			return tempMove;
+		else
 		scoresOfMoves.push(tempMove);
 	}
 
