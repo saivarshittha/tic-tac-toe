@@ -1,4 +1,37 @@
+ 
+html,
+body {
+    height: 100%;
+    width: 96%;
+    background-color: #333;
+    background: url("mars8.jpg") no-repeat center center fixed;
+    min-height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+ header {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    height: 40px;
+    padding-top: 5px;
+    display: block;
+    margin-bottom: 60px;
+    position: relative;
+    top: 10px;
+    width: 100%;
+}
+h1 #tictactoe{
+    color:#66ffff;
+}
 td {
+  cursor: pointer;  
   border:  2px solid #333;
   height:  100px;
   width:  100px;
@@ -6,16 +39,37 @@ td {
   vertical-align:  middle;
   font-family:  "Comic Sans MS", cursive, sans-serif;
   font-size:  70px;
-  cursor: pointer;
+  color: #ffffb3;
+}
+.table {
+    background-color: rgba(0,0,0,0);
+    position: relative;
+    top: -15px;
+    left: 15px;
+    font-size: 2.9em;
+    font-family: 'Open Sans', sans-serif;
+    width: 360px;
+    height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border:5px solid black;
+}
+td:hover{background-color: black}
+.table td {
+    border-collapse: collapse;
+    border-left: 5px solid black;
+    border-right: 5px solid black;
+    border-top:5px solid black;
+    border-bottom: 5px solid black;
 }
 
-table {
-  border-collapse: collapse;
-  position: absolute;
-  left: 50%;
-  margin-left: -155px;
-  top: 100px;
+.table td {
+    cursor: pointer;
+    height: 95px;
+    width: 110px;
 }
+
 .endgame {
   display: none;
   width: 200px;
@@ -32,44 +86,19 @@ table {
   font-size: 2em;
 }
 
-
-html { 
-  background: url(mars1.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+.buttons {
+    background: #b3ffff;    
+    position: relative;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding: 7px;
+    width: 150px;
+    font-size: 1.5em;
+    color: rgb(2, 8, 14);
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;
 }
 
-
-/*.selectSymbol{
-  display: none;
-  width: 220px;
-  top: 110px;
-  background-color: rgba(213, 239, 251, 0.8);
-  position: absolute;
-  left: 50%;
-  margin-left: -110px;
-  padding-top: 10px;
-  padding-bottom: 50px;
-  text-align: center;
-  border-radius: 5px;
-  color: #222222;
-  font-size: 2em;
-}
-
-.selectSymbol button{
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  font-size:  50px;
-  width: 70px;
-}
-
-.selectSymbol  button:first-of-type {
-  margin-right: 10px;
-}
-.selectSymbol  button:last-of-type {
-  margin-left: 10px;
-}
-
-
-*/
