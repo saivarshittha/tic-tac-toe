@@ -1,43 +1,63 @@
+<!-- AI powered Tic-Tac-Toe game -->
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Tic Tac Toe</title>
-  <link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8" />
+    <!-- Title and meta content -->
+    <title>Tic-Tac-Toe</title>
+    <meta content="Sai Varshittha Ponnam" name="author" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="AI powered Tic-Tac-Toe using minimax algorithm">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
 <body>
-
-  <table style="color:White">
-    <tr>
-      <td class="cell" id="0"></td>
-      <td class="cell" id="1"></td>
-
-      <td class="cell" id="2"></td>
-    </tr>
-    <tr>
-      <td class="cell" id="3"></td>
-      <td class="cell" id="4"></td>
-      <td class="cell" id="5"></td>
-    </tr>
-    <tr>
-      <td class="cell" id="6"></td>
-      <td class="cell" id="7"></td>
-      <td class="cell" id="8"></td>
-    </tr>
-  </table>
-  <div class="endgame">
-    <div class="text"></div>
-  </div>
-<!--   <div class="selectSymbol">
-    <p>Choose Symbol : </p>
-    <button onclick="selectSymbol('X')">X</button>
-    <button onclick="selectSymbol('O')">O</button>
-  </div> -->
-  <button onClick="newGame()">1 Player Game</button>
-  <button onClick="twoPlayerGame()">2 Player Game </button>
-  <script src="tic-tac-toe.js"></script>
+    <div class="game">
+        <header>
+            <h1>
+                <div class="heading"><span id="tictactoe">Tic-Tac-Toe</span></div>
+            </h1>
+        </header>
+        <table class="table" style="width: auto;" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="cell" id="0"></td>
+                    <td class="cell" id="1"></td>
+                    <td class="cell" id="2"></td>                          
+                </tr>
+                <tr>
+                    <td class="cell" id="3"></td>
+                    <td class="cell" id="4"></td>
+                    <td class="cell" id="5"></td>                    
+                </tr>
+                <tr>
+                    <td class="cell" id="6"></td>
+                    <td class="cell" id="7"></td>
+                    <td class="cell" id="8"></td>                    
+                </tr>                                
+            </tbody>     
+        </table>
+          <div class="endgame">
+                <div class="text"></div>
+            </div>
+        <div class="gamebuttons">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm">
+                        <button onClick="newGame()" id="singlePlayer" class="buttons">1 Player Game</button>
+                    </div>
+                    <div class="col-sm">
+                         <button onClick="twoPlayerGame()" id="multiplyer" class="buttons">2 Player Game </button>
+                    </div>               
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+<script type="text/javascript" src="tic-tac-toe.js"></script>
 </body>
 </html>
