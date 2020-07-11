@@ -48,13 +48,13 @@ function allowClick(cellInBoard) {
 	}
 	else if (typeof gameBoard[cellInBoard.target.id] == 'number' && flag === 2 && count < cells.length){
 		if(count % 2 === 0){
-			if(!gameTie())turn(player1,cellInBoard.target.id);
 			gameTie();
+			if(!gameTie() && !checkWin(gameBoard,player2))turn(player1,cellInBoard.target.id);
 		}
 		else{
-
-			if(!gameTie())turn(player2,cellInBoard.target.id);
 			gameTie();
+			if(!gameTie() && !checkWin(gameBoard,player1))turn(player2,cellInBoard.target.id);
+
 		}
 		count++;
 
