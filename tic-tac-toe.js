@@ -57,6 +57,7 @@ function allowClick(cellInBoard) {
 
 		}
 		count++;
+		gameTie();
 
 	}
 }
