@@ -1,29 +1,15 @@
-let gameBoard;
+let gameBoard; //Array that puts track of what is present in each cell.
 let computerPlayer = 'O';
 let humanPlayer = 'X';
 let player1 = 'o';
 let player2 = 'x';
 let flag = 1;
-let flag1 =1;
 let count = 0;
 let winningCombinations = [ [0,3,6] , [1,4,7] , [2,5,8] , [0,1,2] , [3,4,5] , [6,7,8] , [6,4,2] , [0,4,8] ];
 const cells = document.querySelectorAll('.cell');
-function twoPlayerGame(){
-	count = 0;
-	flag = 2;
-	document.querySelector(".endgame").style.display = "none";
-	gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-	let i = 0 ;
-	while(i < cells.length){
-		cells[i].style.removeProperty('background-color');
-		cells[i].innerText = '';
-		cells[i].addEventListener('click', allowClick, false);
-		i++;
-	}
-	
-}
+
+/*Function for single player game*/
 function newGame() {
-	//alert("x");
 	flag = 1;
 	document.querySelector(".endgame").style.display = "none";
 	gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -36,6 +22,24 @@ function newGame() {
 	}
 }
 
+
+/*Function for two player game*/
+function twoPlayerGame(){
+	count = 0;
+	flag = 2;
+	document.querySelector(".endgame").style.display = "none";
+	gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]; //Initialising gameBoard
+	let i = 0 ;
+	while(i < cells.length){
+		cells[i].style.removeProperty('background-color');
+		cells[i].innerText = '';
+		cells[i].addEventListener('click', allowClick, false);
+		i++;
+	}
+
+}
+
+/*Defining allowClick function*/
 function allowClick(cellInBoard) {
 	if (typeof gameBoard[cellInBoard.target.id] == 'number' && flag === 1) {
 		turn(humanPlayer,cellInBoard.target.id);
@@ -52,11 +56,12 @@ function allowClick(cellInBoard) {
 			if(!gameTie())turn(player2,cellInBoard.target.id);
 			gameTie();
 		}
-		count++;		
-	 
+		count++;
+
 	}
 }
 
+/*Defining turn function*/
 function turn(player,cellId) {
 	gameBoard[cellId] = player;
 	document.getElementById(cellId).innerText = player;
@@ -64,6 +69,7 @@ function turn(player,cellId) {
 	if (isGameWon) gameFinished(isGameWon)
 }
 
+/*Function to check if a player has won*/
 function checkWin(board, player) {
 	let plays = board.reduce((a, e, i) =>
 		(e === player) ? a.concat(i) : a, []);
@@ -77,6 +83,7 @@ function checkWin(board, player) {
 	return gameWon;
 }
 
+/*Function to check if there is a tie in game*/
 function gameTie() {
 	if (vacantSquares().length == 0) {
 		for (let i = 0; i < cells.length; i++) {
@@ -90,6 +97,7 @@ function gameTie() {
 	return false;
 }
 
+/*Function to check if Game is over*/
 function gameFinished(gameWon) {
 	for (let index of winningCombinations[gameWon.index]) {
 			if(gameWon.player == humanPlayer){
@@ -111,7 +119,7 @@ function gameFinished(gameWon) {
 		document.querySelector(".endgame .text").innerText = "You lose..";
 	}else if(gameWon.player == player1){
 		document.querySelector(".endgame").style.display = "block";
-		document.querySelector(".endgame .text").innerText = "Player1 won!!";		
+		document.querySelector(".endgame .text").innerText = "Player1 won!!";
 	} else if(gameWon.player == player2){
 		document.querySelector(".endgame").style.display = "block";
 		document.querySelector(".endgame .text").innerText = "Player2 won!!";
@@ -119,11 +127,13 @@ function gameFinished(gameWon) {
 
 }
 
+/*This function filters all the vacant cells out*/
 function vacantSquares() {
 	let filteredList = gameBoard.filter(elem => typeof elem == 'number');
 	return filteredList;
 }
 
+/*Minimax algorithm*/
 function minimax(board, player) {
 	let emptySlots = vacantSquares();
 	let scoresOfMoves = [];
