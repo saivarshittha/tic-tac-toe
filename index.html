@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    <!-- Game board -->
     <div class="game">
         <header>
             <h1>
@@ -41,17 +42,50 @@
                 </tr>                                
             </tbody>     
         </table>
+
+        <!-- Instructions -->
+
+        <div id="overlay" onclick="off()">
+          <div id="text">
+            <h2>Instructions..</h2>
+              <ul>
+                  <li>1.This is a 3X3 Tic-tac-toe game.</li>
+                  <li>2.The players take turns putting their marks in empty squares.</li>
+                  <li>The goal is to connect 3 symbols in any direction row,column or diagonal.The first player to achieve this wins.</li>
+                  <li>In Single Player game your symbol is X.</li>
+                  <li>In 2 Player game , the symbols for first and second players are 'o' and 'x' respectively.</li>
+                  <li>Click on 1 Player and 2 Player buttons to play single player and 2 Player game respectively.</li>
+                  <li>Click anywhere to continue..</li>
+
+              </ul>
+          </div>
+        </div>
+
+        <!-- Instructions -->
+        <div style="padding:20px">
+          <button onclick="on()" class="buttons">Instructions</button>
+        </div>
+        <script>
+        function on() {
+          document.getElementById("overlay").style.display = "block";
+        }
+
+        function off() {
+          document.getElementById("overlay").style.display = "none";
+        }
+        </script>
           <div class="endgame">
                 <div class="text"></div>
             </div>
+        <!-- Buttons -->    
         <div class="gamebuttons">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-sm">
-                        <button onClick="newGame()" id="singlePlayer" class="buttons">1 Player Game</button>
+                        <button onClick="newGame()" id="singlePlayer" class="buttons">1 Player</button>
                     </div>
                     <div class="col-sm">
-                         <button onClick="twoPlayerGame()" id="multiplyer" class="buttons">2 Player Game </button>
+                         <button onClick="twoPlayerGame()" id="multiplyer" class="buttons">2 Player</button>
                     </div>               
                 </div>
             </div>
