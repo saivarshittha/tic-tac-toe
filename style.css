@@ -116,13 +116,5 @@ td:hover{background-color: black}
   z-index: 2;
   cursor: pointer;
   background-color: black;
-}
-#text{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: 25px;
   color: white;
-  transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
 }
