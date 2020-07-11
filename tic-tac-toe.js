@@ -56,8 +56,15 @@ function allowClick(cellInBoard) {
 			if(!gameTie() && !checkWin(gameBoard,player1))turn(player2,cellInBoard.target.id);
 
 		}
-		count++;
-		gameTie();
+		count++;	
+		if(checkWin(gameBoard,player1)){
+		document.querySelector(".endgame").style.display = "block";
+		document.querySelector(".endgame .text").innerText = "Player1 won!!";
+		}else if(checkWin(gameBoard,player1)){
+		document.querySelector(".endgame").style.display = "block";
+		document.querySelector(".endgame .text").innerText = "Player2 won!!";
+		}else gameTie();
+
 
 	}
 }
