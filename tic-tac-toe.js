@@ -6,6 +6,7 @@ let player2 = 'x';
 let flag = 1;
 let count = 0;
 let winningCombinations = [ [0,3,6] , [1,4,7] , [2,5,8] , [0,1,2] , [3,4,5] , [6,7,8] , [6,4,2] , [0,4,8] ];
+let undo = [];
 const cells = document.querySelectorAll('.cell');
 
 /*Function for single player game*/
@@ -72,9 +73,33 @@ function allowClick(cellInBoard) {
 /*Defining turn function*/
 function turn(player,cellId) {
 	gameBoard[cellId] = player;
+	undo.push([player,cellId]);
 	document.getElementById(cellId).innerText = player;
 	let isGameWon = checkWin(gameBoard, player)
 	if (isGameWon) gameFinished(isGameWon)
+}
+function undo_func(){
+	document.querySelector(".endgame").style.display = "none";
+	if(flag === 1){
+		let lastPlayer = undo.pop();
+		let x = lastPlayer[1];
+		cells[x].style.removeProperty('background-color');
+		cells[x].innerText = '';
+		cells[x].addEventListener('click', allowClick, false);
+		let lastButOnePlayer = undo.pop();
+		let y = lastButOnePlayer[1];
+		cells[y].style.removeProperty('background-color');
+		cells[y].innerText = '';
+		cells[y].addEventListener('click', allowClick, false);
+
+	}
+	else if(flag == 2){
+		let lastPlayer = undo.pop();
+		let x = lastPlayer[1];
+		cells[x].style.removeProperty('background-color');
+		cells[x].innerText = '';
+		cells[x].addEventListener('click', allowClick, false);		
+	}
 }
 
 /*Function to check if a player has won*/
