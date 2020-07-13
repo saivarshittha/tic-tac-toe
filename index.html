@@ -65,25 +65,21 @@
                 </tr>                                
             </tbody>     
         </table>
-        <!-- Instructions -->
-        <div style="padding:20px">
-          <button onclick="undo_func()" class="buttons">Undo</button>
-        </div>
 
 
         <!-- Instructions -->
-        <div style="padding:20px">
+        <div style="padding:10px">
           <button onclick="on()" class="buttons">Instructions</button>
         </div>
-        <script>
-        function on() {
-          document.getElementById("overlay").style.display = "block";
-        }
 
-        function off() {
-          document.getElementById("overlay").style.display = "none";
-        }
-        </script>
+        <!-- Undo button -->
+        <div style="padding:10px">
+          <button onclick="undo_func()" class="buttons">Undo</button>
+        </div>
+        <!-- Hint button -->
+        <div style="padding:10px">
+          <button onclick="hint()" class="buttons">Hint</button>
+        </div>
           <div class="endgame">
                 <div class="text"></div>
             </div>
