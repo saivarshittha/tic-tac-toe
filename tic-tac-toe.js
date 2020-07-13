@@ -11,6 +11,7 @@ const cells = document.querySelectorAll('.cell');
 
 /*Function for single player game*/
 function newGame() {
+	undo = [];
 	flag = 1;
 	document.querySelector(".endgame").style.display = "none";
 	gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -42,7 +43,7 @@ function twoPlayerGame(){
 
 /*Defining allowClick function*/
 function allowClick(cellInBoard) {
-	if (typeof gameBoard[cellInBoard.target.id] == 'number' && flag === 1) {
+	if (typeof gameBoard[cellInBoard.target.id] == 'number'&& flag === 1) {
 		turn(humanPlayer,cellInBoard.target.id);
 		if (!gameTie() && !checkWin(gameBoard, humanPlayer))
 		 turn(computerPlayer,minimax(gameBoard, computerPlayer).index);
@@ -69,6 +70,21 @@ function allowClick(cellInBoard) {
 
 	}
 }
+function hint(){
+	if (flag ===1 && !gameTie() && !checkWin(gameBoard, computerPlayer)){
+		let x = minimax(gameBoard, humanPlayer).index;
+		alert(x);
+	}/*else if(flag === 2 && !gameTie()){
+		if(count % 2 === 0 &&  !checkWin(gameBoard,player2)){
+			let x =  minimax(gameBoard, player1).index;
+			alert(x);
+		}else if(count % 2 === 1 &&  !checkWin(gameBoard,player1)){
+			let x =  minimax(gameBoard, player2).index;
+			alert(x);
+		}
+
+	}*/		
+}
 
 /*Defining turn function*/
 function turn(player,cellId) {
@@ -78,29 +94,40 @@ function turn(player,cellId) {
 	let isGameWon = checkWin(gameBoard, player)
 	if (isGameWon) gameFinished(isGameWon)
 }
-function undo_func(){
-	document.querySelector(".endgame").style.display = "none";
+function check(){
 	if(flag === 1){
-		let lastPlayer = undo.pop();
-		let x = lastPlayer[1];
-		cells[x].style.removeProperty('background-color');
-		cells[x].innerText = '';
-		cells[x].addEventListener('click', allowClick, false);
-		let lastButOnePlayer = undo.pop();
-		let y = lastButOnePlayer[1];
-		cells[y].style.removeProperty('background-color');
-		cells[y].innerText = '';
-		cells[y].addEventListener('click', allowClick, false);
-
+		if(!gameTie() && !checkWin(gameBoard,humanPlayer) && !checkWin(gameBoard,computerPlayer)) return true;
+	}else if(flag === 2){
+		if(!gameTie() && !checkWin(gameBoard,player1) && !checkWin(gameBoard,player2)) return true;
 	}
-	else if(flag == 2){
-		let lastPlayer = undo.pop();
-		let x = lastPlayer[1];
-		cells[x].style.removeProperty('background-color');
-		cells[x].innerText = '';
-		cells[x].addEventListener('click', allowClick, false);		
-	}
+	return false;
 }
+function undo_func(){
+	if(check()){
+		document.querySelector(".endgame").style.display = "none";
+		if(flag === 1){
+			let lastPlayer = undo.pop();
+			let x = lastPlayer[1]; 
+			gameBoard[x] = Number(x);
+			cells[x].innerText = '';
+			cells[x].addEventListener('click', allowClick, false);
+			let lastButOnePlayer = undo.pop();
+			let y = lastButOnePlayer[1];
+			cells[y].innerText = '';
+			gameBoard[y] = Number(y);					
+			cells[y].addEventListener('click', allowClick, false);	
+   
+		}
+		else if(flag == 2){
+			let lastPlayer = undo.pop();
+			let x = lastPlayer[1];
+			cells[x].innerText = '';
+		    cells[x].addEventListener('click', allowClick, false);	
+		}
+	}
+
+}
+
 
 /*Function to check if a player has won*/
 function checkWin(board, player) {
@@ -219,4 +246,12 @@ function minimax(board, player) {
 	}
 
 	return scoresOfMoves[bestMove];
+}
+
+function on() {
+   document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+    document.getElementById("overlay").style.display = "none";
 }
