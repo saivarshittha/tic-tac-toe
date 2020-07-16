@@ -13,6 +13,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
             integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script>
+        var bleep = new Audio();
+        bleep.src = "s2.mp3";
+    </script>
 </head>
 
 <body>
@@ -69,16 +73,16 @@
 
         <!-- Instructions -->
         <div style="padding:10px">
-          <button onclick="on()" class="buttons">Instructions</button>
+          <button onclick="on()" class="buttons" onmousedown="bleep.play()">Instructions</button>
         </div>
 
         <!-- Undo button -->
         <div style="padding:10px">
-          <button onclick="undo_func()" class="buttons">Undo</button>
+          <button onclick="undo_func()" class="buttons" onmousedown="bleep.play()">Undo</button>
         </div>
         <!-- Hint button -->
         <div style="padding:10px">
-          <button onclick="hint()" class="buttons">Hint</button>
+          <button onclick="hint()" class="buttons" onmousedown="bleep.play()">Hint</button>
         </div>
           <div class="endgame">
                 <div class="text"></div>
@@ -88,10 +92,10 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-sm">
-                        <button onClick="newGame()" id="singlePlayer" class="buttons">1 Player</button> &nbsp;
+                        <button onClick="newGame()" id="singlePlayer" class="buttons" onmousedown="bleep.play()">1 Player</button> &nbsp;
                     </div>
                     <div class="col-sm">
-                         <button onClick="twoPlayerGame()" id="multiplyer" class="buttons">2 Player</button>
+                         <button onClick="twoPlayerGame()" id="multiplyer" class="buttons" onmousedown="bleep.play()">2 Player</button>
                     </div>               
                 </div>
             </div>
