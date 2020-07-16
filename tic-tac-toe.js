@@ -5,6 +5,7 @@ let player1 = 'o';
 let player2 = 'x';
 let flag = 1;
 let count = 0;
+let lastTurned = 'x';
 let winningCombinations = [ [0,3,6] , [1,4,7] , [2,5,8] , [0,1,2] , [3,4,5] , [6,7,8] , [6,4,2] , [0,4,8] ];
 let undo = [];
 const cells = document.querySelectorAll('.cell');
@@ -27,6 +28,7 @@ function newGame() {
 
 /*Function for two player game*/
 function twoPlayerGame(){
+	undo = [];
 	count = 0;
 	flag = 2;
 	document.querySelector(".endgame").style.display = "none";
@@ -49,14 +51,14 @@ function allowClick(cellInBoard) {
 		 turn(computerPlayer,minimax(gameBoard, computerPlayer).index);
 	}
 	else if (typeof gameBoard[cellInBoard.target.id] == 'number' && flag === 2 && count < cells.length){
-		if(count % 2 === 0){
+		if(lastTurned === 'x'){
 			gameTie();
-			if(!gameTie() && !checkWin(gameBoard,player2))turn(player1,cellInBoard.target.id);
-		}
-		else{
+			if(!gameTie() && !checkWin(gameBoard,player1))turn(player1,cellInBoard.target.id);
+			lastTurned = 'o';			
+		}else if(lastTurned === 'o'){
 			gameTie();
-			if(!gameTie() && !checkWin(gameBoard,player1))turn(player2,cellInBoard.target.id);
-
+			if(!gameTie() && !checkWin(gameBoard,player1))turn(player2,cellInBoard.target.id);			
+			lastTurned = 'x';
 		}
 		count++;	
 		if(checkWin(gameBoard,player1)){
@@ -108,9 +110,10 @@ function undo_func(){
 		if(flag === 1){
 			let lastPlayer = undo.pop();
 			let x = lastPlayer[1]; 
-			gameBoard[x] = Number(x);
 			cells[x].innerText = '';
+			gameBoard[x] = Number(x);	
 			cells[x].addEventListener('click', allowClick, false);
+
 			let lastButOnePlayer = undo.pop();
 			let y = lastButOnePlayer[1];
 			cells[y].innerText = '';
@@ -120,8 +123,15 @@ function undo_func(){
 		}
 		else if(flag == 2){
 			let lastPlayer = undo.pop();
+			count--;
 			let x = lastPlayer[1];
+			let y = lastPlayer[0];
+			/*alert(y);
+			alert(typeof y);*/
+			if(y=="o")lastTurned='x';
+				else lastTurned='o';
 			cells[x].innerText = '';
+			gameBoard[x] = Number(x);
 		    cells[x].addEventListener('click', allowClick, false);	
 		}
 	}
