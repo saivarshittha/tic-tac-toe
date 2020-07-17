@@ -50,6 +50,27 @@
                 <div class="heading"><span id="tictactoe">Tic-Tac-Toe</span></div>
             </h1>
         </header>
+        <!-- Instructions -->
+        <div style="padding:20px">
+          <button onclick="on()" class="buttons" onmousedown="bleep.play()">Instructions</button>
+        </div>
+
+        <!-- Buttons -->    
+        <div class="gamebuttons">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm">
+                        <button onClick="newGame()" id="singlePlayer" class="buttons" onmousedown="bleep.play()">1 Player</button> &nbsp;
+                    </div>
+                    <div class="col-sm">
+                        <button onClick="newGame()" id="restart" class="buttons" onmousedown="bleep.play()">Restart</button> &nbsp;
+                    </div>
+                    <div class="col-sm">
+                         <button onClick="twoPlayerGame()" id="multiplyer" class="buttons" onmousedown="bleep.play()">2 Player</button> &nbsp;
+                    </div>               
+                </div>
+            </div>
+        </div>
         <table class="table" style="width: auto;" cellspacing="0">
             <tbody>
                 <tr>
@@ -71,10 +92,7 @@
         </table>
 
 
-        <!-- Instructions -->
-        <div style="padding:10px">
-          <button onclick="on()" class="buttons" onmousedown="bleep.play()">Instructions</button>
-        </div>
+
 
         <!-- Undo button -->
         <div style="padding:10px">
@@ -87,19 +105,7 @@
           <div class="endgame">
                 <div class="text"></div>
             </div>
-        <!-- Buttons -->    
-        <div class="gamebuttons">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-sm">
-                        <button onClick="newGame()" id="singlePlayer" class="buttons" onmousedown="bleep.play()">1 Player</button> &nbsp;
-                    </div>
-                    <div class="col-sm">
-                         <button onClick="twoPlayerGame()" id="multiplyer" class="buttons" onmousedown="bleep.play()">2 Player</button>
-                    </div>               
-                </div>
-            </div>
-        </div>
+
     </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
 <script type="text/javascript" src="tic-tac-toe.js"></script>
