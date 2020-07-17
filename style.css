@@ -3,7 +3,7 @@ body {
     height: 100%;
     width: 96%;
     background-color: #333;
-    background: url("mars8.jpg") no-repeat center center fixed;
+    background: url("mars9.jpg") no-repeat center center fixed;
     min-height: 100%;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -74,7 +74,7 @@ td:hover{background-color: black}
 .endgame {
   display: none;
   width: 200px;
-  top: 120px;
+  top: 500px;
   background-color: rgba(205,133,63, 0.8);
   position: absolute;
   left: 50%;
