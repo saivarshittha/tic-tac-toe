@@ -1,16 +1,18 @@
-let gameBoard; //Array that puts track of what is present in each cell.
+let gameBoard; //Array that keeps track of what is present in each cell.
+/*Variables for players*/
 let computerPlayer = 'O';
 let humanPlayer = 'X';
 let player1 = 'o';
 let player2 = 'x';
-let flag = 1;
+let flag = 1;     /*Flag set to 1 for single player game and 2 for Two-player game.*/
 let count = 0;
-let lastTurned = 'x';
-let winningCombinations = [ [0,3,6] , [1,4,7] , [2,5,8] , [0,1,2] , [3,4,5] , [6,7,8] , [6,4,2] , [0,4,8] ];
-let undo = [];
+let lastTurned = 'x'; /*To keep track of what is the last turned symbol(Used in undo option for 2-player game.)*/
+let winningCombinations = [ [0,3,6] , [1,4,7] , [2,5,8] , [0,1,2] , [3,4,5] , [6,7,8] , [6,4,2] , [0,4,8] ]; /*All winning possibilities.*/
+let undo = []; /*Used to keep track of what is present on board in the order of how they are filled.*/
 const cells = document.querySelectorAll('.cell');
 
 /*Function for single player game*/
+
 function newGame() {
 	undo = [];
 	flag = 1;
@@ -25,8 +27,8 @@ function newGame() {
 	}
 }
 
-
 /*Function for two player game*/
+
 function twoPlayerGame(){
 	undo = [];
 	count = 0;
@@ -44,6 +46,7 @@ function twoPlayerGame(){
 }
 
 /*Defining allowClick function*/
+
 function allowClick(cellInBoard) {
 	if (typeof gameBoard[cellInBoard.target.id] == 'number'&& flag === 1) {
 		turn(humanPlayer,cellInBoard.target.id);
@@ -72,23 +75,9 @@ function allowClick(cellInBoard) {
 
 	}
 }
-function hint(){
-	if (flag ===1 && !gameTie() && !checkWin(gameBoard, computerPlayer)){
-		let x = minimax(gameBoard, humanPlayer).index;
-		alert(x);
-	}/*else if(flag === 2 && !gameTie()){
-		if(count % 2 === 0 &&  !checkWin(gameBoard,player2)){
-			let x =  minimax(gameBoard, player1).index;
-			alert(x);
-		}else if(count % 2 === 1 &&  !checkWin(gameBoard,player1)){
-			let x =  minimax(gameBoard, player2).index;
-			alert(x);
-		}
-
-	}*/		
-}
 
 /*Defining turn function*/
+
 function turn(player,cellId) {
 	gameBoard[cellId] = player;
 	undo.push([player,cellId]);
@@ -104,42 +93,11 @@ function check(){
 	}
 	return false;
 }
-function undo_func(){
-	if(check()){
-		document.querySelector(".endgame").style.display = "none";
-		if(flag === 1){
-			let lastPlayer = undo.pop();
-			let x = lastPlayer[1]; 
-			cells[x].innerText = '';
-			gameBoard[x] = Number(x);	
-			cells[x].addEventListener('click', allowClick, false);
 
-			let lastButOnePlayer = undo.pop();
-			let y = lastButOnePlayer[1];
-			cells[y].innerText = '';
-			gameBoard[y] = Number(y);					
-			cells[y].addEventListener('click', allowClick, false);	
-   
-		}
-		else if(flag == 2){
-			let lastPlayer = undo.pop();
-			count--;
-			let x = lastPlayer[1];
-			let y = lastPlayer[0];
-			/*alert(y);
-			alert(typeof y);*/
-			if(y=="o")lastTurned='x';
-				else lastTurned='o';
-			cells[x].innerText = '';
-			gameBoard[x] = Number(x);
-		    cells[x].addEventListener('click', allowClick, false);	
-		}
-	}
-
-}
 
 
 /*Function to check if a player has won*/
+
 function checkWin(board, player) {
 	let plays = board.reduce((a, e, i) =>
 		(e === player) ? a.concat(i) : a, []);
@@ -154,6 +112,7 @@ function checkWin(board, player) {
 }
 
 /*Function to check if there is a tie in game*/
+
 function gameTie() {
 	if (vacantSquares().length == 0) {
 		for (let i = 0; i < cells.length; i++) {
@@ -168,6 +127,7 @@ function gameTie() {
 }
 
 /*Function to check if Game is over*/
+
 function gameFinished(gameWon) {
 	for (let index of winningCombinations[gameWon.index]) {
 			if(gameWon.player == humanPlayer){
@@ -198,12 +158,14 @@ function gameFinished(gameWon) {
 }
 
 /*This function filters all the vacant cells out*/
+
 function vacantSquares() {
 	let filteredList = gameBoard.filter(elem => typeof elem == 'number');
 	return filteredList;
 }
 
 /*Minimax algorithm*/
+
 function minimax(board, player) {
 	let emptySlots = vacantSquares();
 	let scoresOfMoves = [];
@@ -258,6 +220,50 @@ function minimax(board, player) {
 	return scoresOfMoves[bestMove];
 }
 
+/*Hint function*/
+
+function hint(){
+	if (flag ===1 && !gameTie() && !checkWin(gameBoard, computerPlayer)){
+		let x = minimax(gameBoard, humanPlayer).index;
+		alert("Click on cell "+(x+1));
+	}	
+}
+
+/*Undo Function*/
+function undo_func(){
+	if(check()){
+		document.querySelector(".endgame").style.display = "none";
+		if(flag === 1){
+			/****For Single Player****/
+			let lastPlayer = undo.pop();
+			let x = lastPlayer[1]; 
+			cells[x].innerText = '';
+			gameBoard[x] = Number(x);	
+			cells[x].addEventListener('click', allowClick, false);
+
+			let lastButOnePlayer = undo.pop();
+			let y = lastButOnePlayer[1];
+			cells[y].innerText = '';
+			gameBoard[y] = Number(y);					
+			cells[y].addEventListener('click', allowClick, false);	
+   
+		}
+		else if(flag == 2){
+			/****For 2-Player Game ****/
+			let lastPlayer = undo.pop();
+			count--;
+			let x = lastPlayer[1];
+			let y = lastPlayer[0];
+			if(y=="o")lastTurned='x';
+				else lastTurned='o';
+			cells[x].innerText = '';
+			gameBoard[x] = Number(x);
+		    cells[x].addEventListener('click', allowClick, false);	
+		}
+	}
+
+}
+/* on , off dunctions for instructions overlay.*/
 function on() {
    document.getElementById("overlay").style.display = "block";
 }
