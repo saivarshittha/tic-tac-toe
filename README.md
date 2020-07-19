@@ -1,3 +1,6 @@
+# Tic-Tac-Toe Game Using Minimax.
+
+**Game link** : [Tic-Tac-Toe ](https://saivarshittha-tic-tac-toe.herokuapp.com/)
  1. This is a 3X3 **Tic-tac-toe** game.
  2. It is implemented by using *minimax* algorithm.
  3. The players take turns putting their marks in empty squares.
