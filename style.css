@@ -26,10 +26,12 @@ body {
     top: 10px;
     width: 100%;
 }
+
 /*Title*/
 h1 #tictactoe{
     color:#66ffff;
 }
+
 /*Table*/
 td {
   cursor: pointer;  
@@ -71,6 +73,7 @@ td:hover{background-color: black}
     width: 110px;
 }
 
+/*End game box*/
 .endgame {
   display: none;
   width: 200px;
@@ -86,6 +89,7 @@ td:hover{background-color: black}
   color: white;
   font-size: 2em;
 }
+
 /*Buttons*/
 .buttons {
     background: #b3ffff;    
@@ -102,7 +106,7 @@ td:hover{background-color: black}
     cursor: pointer;
     z-index: 1;
 }
-/*Instructions*/
+/*Instructions overlay styling*/
 #overlay{
   position: fixed;
   display: none;
