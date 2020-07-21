@@ -171,10 +171,11 @@ function vacantSquares() {
 /*Minimax algorithm*/
 
 function minimax(board, player) {
-	let emptySlots = vacantSquares();
-	let scoresOfMoves = [];
+	let emptySlots = vacantSquares(); 	
+	let scoresOfMoves = [];			//For collecting scores for all the empty spots to evaluate them later.
 	let bestMove;
 
+	//alotting scores
 	if (checkWin(board,computerPlayer)) {
 		return {score: 10};
 	} else if (checkWin(board, humanPlayer)) {
@@ -203,6 +204,7 @@ function minimax(board, player) {
 		scoresOfMoves.push(tempMove);
 	}
 
+	// checking for the best Move
 	if(player === computerPlayer) {
 		let bestScore = -99999;
 		for(let i = 0; i < scoresOfMoves.length; i++) {
