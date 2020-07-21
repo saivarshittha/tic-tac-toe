@@ -134,7 +134,11 @@ function gameFinished(gameWon) {
 				document.getElementById(index).style.backgroundColor = "red";
 			} else if (gameWon.player == computerPlayer){
 				document.getElementById(index).style.backgroundColor = "blue";
-			}
+			}  else if (gameWon.player == player1){
+				document.getElementById(index).style.backgroundColor = "#b3ffff";
+			}  else if (gameWon.player == player2){
+				document.getElementById(index).style.backgroundColor = "blue";
+			} 
 	}
 	let i = 0 ;
 	while(i < cells.length){
